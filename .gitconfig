@@ -1,0 +1,11 @@
+[user]
+	email = Yeah, I'm not going to put this on github.
+	name = Austin Keeley
+[push]
+	default = simple
+[core]
+	editor = vim
+[http]
+	proxy = 
+[https]
+	proxy = 
