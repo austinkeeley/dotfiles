@@ -16,3 +16,7 @@ Also, here are the plugins that I use:
 * syntastic
 * vim-colors-solarized
 * web-indent
+
+
+## zsh
+My zsh settings are pretty boring.  I'm still using robbyrussell.
