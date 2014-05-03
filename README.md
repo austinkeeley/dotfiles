@@ -17,6 +17,8 @@ Also, here are the plugins that I use:
 * vim-colors-solarized
 * web-indent
 
-
 ## zsh
 My zsh settings are pretty boring.  I'm still using robbyrussell.
+
+## git
+I keep forgetting how to set my HTTP/HTTPS proxy settings, so they are set to the empty string so they get ignored.
