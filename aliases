@@ -1,0 +1,16 @@
+# Lots of stupid aliases!
+
+# As in, "wat just happened?"
+alias wat='cat /etc/httpd/logs/error.log'
+
+# As in "HTTP restart"
+alias hr='sudo /sbin/service/httpd restart'
+
+# As in "Python Path"
+alias pp='python -c "import sys; print sys.path"'
+
+# As in "sudo vim"
+alias svim='sudo vim'
+
+
+
