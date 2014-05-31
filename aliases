@@ -15,4 +15,5 @@ alias svim='sudo vim'
 # Let's rumble.
 alias rumble='git daemon --base-path=. --export-all --verbose --reuseaddr --enable=receive-pack'
 
-
+# A more gentlemanly way to show directory contents
+alias ll='ls -lAh --group-directories-first'
