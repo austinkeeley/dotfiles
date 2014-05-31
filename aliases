@@ -6,6 +6,9 @@ alias wat='cat /etc/httpd/logs/error.log'
 # As in "HTTP restart"
 alias hr='sudo /sbin/service/httpd restart'
 
+# Debian version
+# alias hr='sudo /usr/sbin/service apache2 restart'
+
 # As in "Python Path"
 alias pp='python -c "import sys; print sys.path"'
 
