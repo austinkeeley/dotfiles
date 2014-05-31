@@ -12,5 +12,7 @@ alias pp='python -c "import sys; print sys.path"'
 # As in "sudo vim"
 alias svim='sudo vim'
 
+# Let's rumble.
+alias rumble='git daemon --base-path=. --export-all --verbose --reuseaddr --enable=receive-pack'
 
 
