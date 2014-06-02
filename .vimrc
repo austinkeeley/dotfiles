@@ -87,3 +87,6 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+" A shortcut for cleaning up JSON files
+nmap =j :%!python -m json.tool<CR>
