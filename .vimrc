@@ -90,3 +90,8 @@ autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buff
 
 " A shortcut for cleaning up JSON files
 nmap =j :%!python -m json.tool<CR>
+
+" I often have both jslint and jshint installed, but I like jshint better these days.  Set it up to be the default syntax checker
+" and look for a custom .jshintrc file in the current directory.
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_jshint_conf = '.jshintrc'
