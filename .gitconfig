@@ -1,5 +1,5 @@
 [user]
-	email = Yeah, I'm not going to put this on github.
+	email = Nope, not going on github.
 	name = Austin Keeley
 [push]
 	default = simple
@@ -9,3 +9,5 @@
 	proxy = 
 [https]
 	proxy = 
+[alias]
+        rumble = daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
