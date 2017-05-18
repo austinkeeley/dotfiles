@@ -1,12 +1,28 @@
-" Pathogen infection
-execute pathogen#infect()
+" Vim configuration for Austin Keeley (@austinkeeley)
 
-" Basic stuff that everyone needs.
+" Vundle set up
 set nocompatible
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'bling/vim-airline'
+call vundle#end()           
+filetype plugin indent on    
+
+" Make sure airline appears
+set laststatus=2
+
+" Basic stuff
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
+
 set incsearch 
 set ignorecase smartcase
 
@@ -32,8 +48,8 @@ autocmd FileType javascript set tabstop=2|set shiftwidth=2
 " Set my colors; here's a few that I like
 set background=dark
 " color inkpot
- color solarized " From https://github.com/altercation/vim-colors-solarized
-" color railscasts " From https://github.com/jpo/vim-railscasts-theme, not the default one!
+color solarized 
+" color railscasts
 " color desertEX
 " color zenburn
 " color molokai
@@ -66,11 +82,8 @@ inoremap <right> <nop>
 " gVim options
 if has("gui_running")
   set guioptions-=T    " Get rid of the toolbar. It's ugly.
-    " My preferred font, Proggy Clean, from http://www.proggyfonts.com
     if has("win32")
-      set guifont=ProggyCleanTTSZ:h12
-      " No Proggy? Use Consolas 10pt which is okay 
-      " set guifont=Consolas:h10
+      set guifont=Consolas:h10
     elseif has("gui_gtk")
       set guifont=Source\ Code\ Pro\ 10
     endif
@@ -89,9 +102,32 @@ endfun
 autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " A shortcut for cleaning up JSON files
-nmap =j :%!python -m json.tool<CR>
+nmap <leader>j :%!python -m json.tool<CR>
 
-" I often have both jslint and jshint installed, but I like jshint better these days.  Set it up to be the default syntax checker
-" and look for a custom .jshintrc file in the current directory.
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_javascript_jshint_conf = '.jshintrc'
+" NERDTree toggle 
+nmap <leader>n :NERDTreeToggle<CR>
+
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open syntastic error location panel
+        Errors
+    endif
+endfunction
+
+
+" F6 to turn off Syntastic error panel and F7 to toggle Syntastic on/off
+" completely
+nnoremap <silent> <F6> :<C-u>call ToggleErrors()<CR>
+nnoremap <silent> <F7> :SyntasticToggleMode<CR>
