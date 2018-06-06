@@ -1,18 +1,30 @@
 " Vim configuration for Austin Keeley (@austinkeeley)
+"
+" Installation instructions (nvim)
+" 1. Install Vundle
+"     git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim
+" 2. Copy this file to ~/.config/nvim/init.vim
+" 2. Start vim, run :PluginInstall
 
 " Vundle set up
+" For regular vim, change the `set rtp` line
 set nocompatible
 filetype off
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+" Regular vim version
+" set rtp+=~/.vim/bundle/Vundle.vim
+" nvim version
+set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'bling/vim-airline'
-call vundle#end()           
-filetype plugin indent on    
+call vundle#end()
+
+
+filetype plugin indent on
 
 " Make sure airline appears
 set laststatus=2
@@ -23,7 +35,7 @@ filetype on
 filetype indent on
 filetype plugin on
 
-set incsearch 
+set incsearch
 set ignorecase smartcase
 
 " Make sure my backspace key actually works
@@ -48,12 +60,12 @@ autocmd FileType javascript set tabstop=2|set shiftwidth=2
 " Set my colors; here's a few that I like
 set background=dark
 " color inkpot
-color solarized 
+" color solarized
 " color railscasts
 " color desertEX
 " color zenburn
-" color molokai
-" color slate 
+color molokai
+" color slate
 " color matrix
 " color vibrantchalk
 " color wombat256
@@ -65,9 +77,13 @@ color solarized
 set cursorline " Note that this doesn't play nice with all color schemes
 set number
 set ruler
+set colorcolumn=88
 
 " Does anyone actually use this?
 set novisualbell
+
+" Don't let vim insert new lines
+set textwidth=0
 
 " Turn off the arrow keys to make you better at hjkl
 nnoremap <up> <nop>
@@ -92,19 +108,24 @@ if has("gui_running")
 endif
 
 " Remove trailing whitespace
-fun! <SID>StripTrailingWhitespaces()
+function! StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
     %s/\s\+$//e
     call cursor(l, c)
 endfun
 
-autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+" Automatically clean up trailing whitespace in source code. Note that if you're dealing
+" with 'other people's code' you might make them angry when you commit a ton of changes
+" due to this.
+autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call StripTrailingWhitespaces()
 
 " A shortcut for cleaning up JSON files
+" \j
 nmap <leader>j :%!python -m json.tool<CR>
 
-" NERDTree toggle 
+" NERDTree toggle
+" \n
 nmap <leader>n :NERDTreeToggle<CR>
 
 " Syntastic settings
@@ -116,18 +137,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {'mode':'passive'}
 
-function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-        Errors
-    endif
-endfunction
-
-
-" F6 to turn off Syntastic error panel and F7 to toggle Syntastic on/off
-" completely
-nnoremap <silent> <F6> :<C-u>call ToggleErrors()<CR>
-nnoremap <silent> <F7> :SyntasticToggleMode<CR>
+" Capital L to do a syntastic check e.g. 'Lint'
+" Lower case l to turn off syntastic 
+nnoremap <leader>L :SyntasticCheck<CR> :Errors<CR>
+nnoremap <Leader>l :SyntasticReset<CR>
