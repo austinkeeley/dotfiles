@@ -57,6 +57,11 @@ autocmd FileType make setlocal noexpandtab
 autocmd FileType ruby set tabstop=2|set shiftwidth=2
 autocmd FileType javascript set tabstop=2|set shiftwidth=2
 
+" Show tabs and spaces
+set listchars=tab:>-,trail:·
+set list
+
+
 " Set my colors; here's a few that I like
 set background=dark
 " color inkpot
@@ -140,6 +145,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {'mode':'passive'}
 
 " Capital L to do a syntastic check e.g. 'Lint'
-" Lower case l to turn off syntastic 
+" Lower case l to turn off syntastic
 nnoremap <leader>L :SyntasticCheck<CR> :Errors<CR>
 nnoremap <Leader>l :SyntasticReset<CR>
