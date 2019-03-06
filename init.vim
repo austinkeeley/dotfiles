@@ -153,4 +153,8 @@ nnoremap <Leader>l :SyntasticReset<CR>
 
 " Show trailing whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
-:map <leader>w :match ExtraWhitespace /\s\+$/<CR>
+map <leader>w :match ExtraWhitespace /\s\+$/<CR>
+
+" Quickly switch between tabs and spaces
+map <leader>T :set noexpandtab<CR>
+map <leader>t :set expandtab<CR>
