@@ -28,6 +28,7 @@ filetype plugin indent on
 
 " Make sure airline appears
 set laststatus=2
+let g:airline_powerline_fonts = 1
 
 " Basic stuff
 syntax on
@@ -122,16 +123,9 @@ endfun
 
 " Automatically clean up trailing whitespace in source code. Note that if you're dealing
 " with 'other people's code' you might make them angry when you commit a ton of changes
-" due to this.
-autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call StripTrailingWhitespaces()
+" due to this. See also the shortcut for showing trailing whitespace.
+" autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call StripTrailingWhitespaces()
 
-" A shortcut for cleaning up JSON files
-" \j
-nmap <leader>j :%!python -m json.tool<CR>
-
-" NERDTree toggle
-" \n
-nmap <leader>n :NERDTreeToggle<CR>
 
 " Syntastic settings
 set statusline+=%#warningmsg#
@@ -144,7 +138,19 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {'mode':'passive'}
 
+""""""" Shortcuts
+
+" A shortcut for cleaning up JSON files
+nmap <leader>j :%!python -m json.tool<CR>
+
+" NERDTree toggle
+nmap <leader>n :NERDTreeToggle<CR>
+
 " Capital L to do a syntastic check e.g. 'Lint'
 " Lower case l to turn off syntastic
 nnoremap <leader>L :SyntasticCheck<CR> :Errors<CR>
 nnoremap <Leader>l :SyntasticReset<CR>
+
+" Show trailing whitespaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+:map <leader>w :match ExtraWhitespace /\s\+$/<CR>
