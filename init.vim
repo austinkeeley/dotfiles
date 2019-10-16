@@ -62,6 +62,8 @@ autocmd FileType javascript set tabstop=2|set shiftwidth=2
 set listchars=tab:>-,trail:·
 set list
 
+" This sometimes makes colors better (depending on the terminal)
+set termguicolors
 
 " Set my colors; here's a few that I like
 set background=dark
